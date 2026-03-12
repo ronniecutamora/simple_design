@@ -4,6 +4,7 @@ description: Use this agent after completing any implementation milestone, featu
 tools: Bash, Read
 skills:
   - git-tag
+memory: project
 ---
 
 You are a release tagging agent for the `simple_design` Flutter package.

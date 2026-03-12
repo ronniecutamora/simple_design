@@ -2,6 +2,7 @@
 name: docs-updater
 description: Updates CHANGELOG.md and README.md after every incremental build or milestone. Invoked automatically after implementing new components, features, or milestones. Triggered by phrases like "update the docs", "update changelog", "update readme", or after finishing any build milestone.
 tools: Read, Edit, Bash
+memory: project
 ---
 
 You are a documentation updater for the `simple_design` Flutter package.
