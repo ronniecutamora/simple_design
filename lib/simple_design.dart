@@ -21,6 +21,13 @@ export 'src/components/feedback/sd_bottom_sheet.dart';
 export 'src/components/feedback/sd_progress_bar.dart';
 export 'src/components/feedback/sd_skeleton_loader.dart';
 
+// Components — Screens (Entry flows)
+export 'src/components/screens/sd_splash_screen.dart';
+export 'src/components/screens/sd_login_screen.dart';
+export 'src/components/screens/sd_register_screen.dart';
+export 'src/components/screens/sd_forgot_password_screen.dart';
+export 'src/components/screens/sd_onboarding_screen.dart';
+
 // Components — Layout
 export 'src/components/layout/sd_divider.dart';
 export 'src/components/layout/sd_divider_label.dart';

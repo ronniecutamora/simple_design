@@ -9,6 +9,7 @@ import 'package:simple_design/screens/typography/typography.screen.dart';
 import 'package:simple_design/screens/navigation_showcase/navigation_showcase.screen.dart';
 import 'package:simple_design/screens/feedback/feedback.screen.dart';
 import 'package:simple_design/screens/layout/layout.screen.dart';
+import 'package:simple_design/screens/entry_screens/entry_screens.screen.dart';
 import 'package:simple_design/widgets/showcase_shell.dart';
 
 final GlobalKey<NavigatorState> globalNavigatorKey = GlobalKey<NavigatorState>();
@@ -56,6 +57,10 @@ final router = GoRouter(
         // index 8 — Layout (v0.6)
         StatefulShellBranch(routes: [
           GoRoute(path: LayoutScreen.routeName, builder: (ctx, state) => const LayoutScreen()),
+        ]),
+        // index 9 — Entry Screens (v0.7)
+        StatefulShellBranch(routes: [
+          GoRoute(path: EntryScreensScreen.routeName, builder: (ctx, state) => const EntryScreensScreen()),
         ]),
       ],
     ),
