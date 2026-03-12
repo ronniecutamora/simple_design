@@ -68,7 +68,7 @@ A clean, minimal Flutter design system. Any component works in 1–2 lines. Colo
 dependencies:
   simple_design:
     git:
-      url: https://github.com/your-org/sd_flutter.git
+      url: https://github.com/ronniewitcenter/simple_design.git
       ref: main
 ```
 
