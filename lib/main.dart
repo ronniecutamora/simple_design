@@ -17,6 +17,7 @@ class SimpleApp extends StatelessWidget {
       routerConfig: router,
       title: 'Simple Design',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue))
     );
   }
 }
