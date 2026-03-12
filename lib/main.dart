@@ -15,8 +15,8 @@ class SimpleApp extends StatelessWidget {
       routerConfig: router,
       title: 'Simple Design',
       debugShowCheckedModeBanner: false,
-      theme: SDTheme.light,
-      darkTheme: SDTheme.dark,
+      theme: SDTheme.withSeed(const Color.fromARGB(255, 243, 33, 124)),
+      darkTheme: SDTheme.withSeed(Color.fromARGB(255, 243, 33, 124), brightness: Brightness.dark),
       themeMode: ThemeMode.system,
     );
   }
