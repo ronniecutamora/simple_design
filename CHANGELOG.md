@@ -6,6 +6,33 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v0.7.0] — 2026-03-12
+
+### Added — Components
+
+- **`SDSplashScreen`** — full-screen splash with fade-in + scale animation, auto-calls `onComplete` after `duration`
+  - Parameters: `logo?`, `title?`, `onComplete`, `duration`
+  - `logo` accepts any widget: `Image.asset`, `SvgPicture.asset`, `FlutterLogo`, `Icon`, etc.
+
+- **`SDLoginScreen`** — pre-built login screen with email + password form, inline error handling, and loading state
+  - Parameters: `logo?`, `title?`, `subtitle?`, `onLogin`, `onForgotPassword?`, `onRegister?`
+
+- **`SDRegisterScreen`** — pre-built registration screen with name + email + password + confirm password fields and validation
+  - Parameters: `logo?`, `title?`, `subtitle?`, `onRegister`, `onLogin?`
+
+- **`SDForgotPasswordScreen`** — email field + send link action with success confirmation state
+  - Parameters: `logo?`, `onSendLink`, `onBack?`
+
+- **`SDOnboardingScreen`** + **`SDOnboardingPage`** — swipeable onboarding pages with animated dot indicator, skip, and next/done controls
+  - `SDOnboardingPage(title, body, {image?})` for individual page definitions
+  - Parameters: `pages`, `onComplete`, `onSkip?`
+
+### Added — Showcase App
+
+- **Entry Screens screen** (`/entry`) — live demos of all 5 pre-built screens; added to navigation drawer at index 9
+
+---
+
 ## [v0.6.0] — 2026-03-12
 
 ### Added — Components
@@ -269,5 +296,5 @@ Versions follow [Semantic Versioning](https://semver.org/).
 | v0.4.0 ✅ | Feedback — `SDAlert`, `SDModal`, `SDSnackbar`, `SDToast`, `SDBottomSheet`, `SDProgressBar`, `SDSkeletonLoader` |
 | v0.5.0 ✅ | Navigation — `SDAppBar`, `SDTabs`, `SDBottomNav`, `SDDrawer`, `SDBreadcrumb`, `SDStepIndicator` |
 | v0.6.0 ✅ | Layout — `SDDividerLabel`, `SDAccordion`, `SDCarousel`, `SDBentoBox`, `SDEmptyState` |
-| v0.7.0 | Entry Screens — `SDSplashScreen`, `SDLoginScreen`, `SDRegisterScreen`, `SDOnboardingScreen` |
+| v0.7.0 ✅ | Entry Screens — `SDSplashScreen`, `SDLoginScreen`, `SDRegisterScreen`, `SDForgotPasswordScreen`, `SDOnboardingScreen` |
 | v1.0.0 | Dark theme showcase, full README, release |

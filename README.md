@@ -2,7 +2,7 @@
 
 A clean, minimal Flutter design system. Any component works in 1–2 lines. Colors and typography come from Flutter's built-in theme system — no hardcoded values ever.
 
-**Current version:** v0.6.0 — Advanced Layout
+**Current version:** v0.7.0 — Entry Screens
 
 ---
 
@@ -14,7 +14,7 @@ dependencies:
   simple_design:
     git:
       url: https://github.com/your-org/sd_flutter.git
-      ref: v0.6.0
+      ref: v0.7.0
 ```
 
 ## Quick Start
@@ -447,6 +447,93 @@ SDEmptyState(
 
 ---
 
+### v0.7 — Entry Screens
+
+All entry screens accept a `Widget? logo` parameter that takes any widget — `Image.asset`, `SvgPicture.asset`, `FlutterLogo`, `Icon`, etc.
+
+#### SDSplashScreen
+
+```dart
+// Minimal — no logo, auto-navigates after 2 seconds
+SDSplashScreen(onComplete: () => context.go('/home'))
+
+// With logo and title
+SDSplashScreen(
+  logo: Image.asset('assets/logo.png', width: 120),
+  title: 'My App',
+  duration: const Duration(seconds: 3),
+  onComplete: () => context.go('/home'),
+)
+```
+
+#### SDLoginScreen
+
+```dart
+// Minimal
+SDLoginScreen(
+  onLogin: (email, password) async { /* authenticate */ },
+)
+
+// Full
+SDLoginScreen(
+  logo: FlutterLogo(size: 64),
+  title: 'Welcome back',
+  subtitle: 'Sign in to continue',
+  onLogin: (email, password) async { /* authenticate */ },
+  onForgotPassword: () => context.go('/forgot-password'),
+  onRegister: () => context.go('/register'),
+)
+```
+
+#### SDRegisterScreen
+
+```dart
+SDRegisterScreen(
+  logo: Image.asset('assets/logo.png', width: 80),
+  title: 'Create account',
+  subtitle: 'Join us today',
+  onRegister: (name, email, password) async { /* create account */ },
+  onLogin: () => context.go('/login'),
+)
+```
+
+#### SDForgotPasswordScreen
+
+```dart
+SDForgotPasswordScreen(
+  logo: FlutterLogo(size: 64),
+  onSendLink: (email) async { /* send reset email */ },
+  onBack: () => context.go('/login'),
+)
+```
+
+#### SDOnboardingScreen
+
+```dart
+SDOnboardingScreen(
+  pages: [
+    SDOnboardingPage(
+      title: 'Welcome',
+      body: 'Discover what the app can do.',
+      image: Image.asset('assets/onboarding_1.png'),
+    ),
+    SDOnboardingPage(
+      title: 'Stay organised',
+      body: 'Everything in one place.',
+      image: Image.asset('assets/onboarding_2.png'),
+    ),
+    SDOnboardingPage(
+      title: "You're ready",
+      body: "Let's get started.",
+    ),
+  ],
+  onComplete: () => context.go('/home'),
+  onSkip: () => context.go('/home'),
+)
+```
+
+---
+
 ## Animation Tokens
 
 ```dart
@@ -485,7 +572,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history and upcoming miles
 | **v0.4** ✅ | SDAlert, SDModal, SDSnackbar, SDToast, SDBottomSheet, SDProgressBar, SDSkeletonLoader |
 | **v0.5** ✅ | SDAppBar, SDTabs, SDBottomNav, SDDrawer, SDBreadcrumb, SDStepIndicator |
 | **v0.6** ✅ | SDDividerLabel, SDAccordion, SDCarousel, SDBentoBox, SDEmptyState |
-| v0.7 | SDSplashScreen, SDLoginScreen, SDRegisterScreen, SDOnboardingScreen |
+| **v0.7** ✅ | SDSplashScreen, SDLoginScreen, SDRegisterScreen, SDForgotPasswordScreen, SDOnboardingScreen |
 | v1.0 | Full release |
 
 ---
