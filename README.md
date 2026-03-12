@@ -1,9 +1,9 @@
 # simple_design
 # simple_design
 
-[![Version](https://img.shields.io/badge/version-v0.4.0-0D1117?style=flat-square&logo=github)](https://github.com/ronniewitcenter/simple_design/releases/tag/v0.4.0)
-[![Flutter](https://img.shields.io/badge/Flutter-3.16+-02569B?style=flat-square&logo=flutter)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.0+-0175C2?style=flat-square&logo=dart)](https://dart.dev)
+[![Version](https://img.shields.io/badge/version-v0.4.0-0D1117?style=flat-square&logo=github)](https://github.com/ronniewitcenter/simple_design/releases/tag/v0.7.3)
+[![Flutter](https://img.shields.io/badge/Flutter-3.10+-02569B?style=flat-square&logo=flutter)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.11+-0175C2?style=flat-square&logo=dart)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Material 3](https://img.shields.io/badge/Material-3-6750A4?style=flat-square&logo=material-design)](https://m3.material.io)
 
