@@ -35,6 +35,14 @@ export 'src/components/inputs/sd_slider.dart';
 export 'src/components/inputs/sd_date_picker.dart';
 export 'src/components/inputs/sd_form.dart';
 
+// Components — Navigation
+export 'src/components/navigation/sd_app_bar.dart';
+export 'src/components/navigation/sd_tabs.dart';
+export 'src/components/navigation/sd_bottom_nav.dart';
+export 'src/components/navigation/sd_drawer.dart';
+export 'src/components/navigation/sd_breadcrumb.dart';
+export 'src/components/navigation/sd_step_indicator.dart';
+
 // Components — Data Display
 export 'src/components/data_display/sd_card.dart';
 export 'src/components/data_display/sd_list_item.dart';

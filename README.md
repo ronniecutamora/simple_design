@@ -2,7 +2,7 @@
 
 A clean, minimal Flutter design system. Any component works in 1–2 lines. Colors and typography come from Flutter's built-in theme system — no hardcoded values ever.
 
-**Current version:** v0.4.0 — Feedback
+**Current version:** v0.5.0 — Navigation
 
 ---
 
@@ -14,7 +14,7 @@ dependencies:
   simple_design:
     git:
       url: https://github.com/your-org/sd_flutter.git
-      ref: v0.4.0
+      ref: v0.5.0
 ```
 
 ## Quick Start
@@ -69,7 +69,7 @@ Theme.of(context).textTheme.bodyMedium
 
 ---
 
-## Components — v0.4
+## Components — v0.5
 
 ### SDButton
 
@@ -303,6 +303,78 @@ SDSkeletonLoader.card()                                  // card preset
 
 ---
 
+### v0.5 — Navigation
+
+#### SDAppBar
+
+```dart
+Scaffold(appBar: SDAppBar(title: 'Home'))
+Scaffold(appBar: SDAppBar(title: 'Search', actions: [IconButton(icon: Icon(Icons.search), onPressed: () {})]))
+Scaffold(appBar: SDAppBar(title: 'Details', leading: BackButton(), centerTitle: true))
+```
+
+#### SDTabs
+
+```dart
+SDTabs(
+  tabs: ['Overview', 'Details', 'Reviews'],
+  children: [Text('Tab 1'), Text('Tab 2'), Text('Tab 3')],
+)
+SDTabs(tabs: ['A', 'B'], children: [...], contentHeight: 200)
+```
+
+#### SDBottomNav
+
+```dart
+Scaffold(
+  bottomNavigationBar: SDBottomNav(
+    selectedIndex: _index,
+    onDestinationSelected: (i) => setState(() => _index = i),
+    items: [
+      SDBottomNavItem(label: 'Home',   icon: Icons.home_outlined,   selectedIcon: Icons.home),
+      SDBottomNavItem(label: 'Search', icon: Icons.search_outlined, selectedIcon: Icons.search),
+    ],
+  ),
+)
+```
+
+#### SDDrawer
+
+```dart
+Scaffold(
+  drawer: SDDrawer(
+    header: Text('My App'),
+    selectedIndex: _drawerIndex,
+    items: [
+      SDDrawerItem(label: 'Home',     icon: Icons.home_outlined,     selectedIcon: Icons.home,     onTap: () {}),
+      SDDrawerItem(label: 'Settings', icon: Icons.settings_outlined, selectedIcon: Icons.settings, onTap: () {}),
+    ],
+    onDestinationSelected: (i) => setState(() => _drawerIndex = i),
+  ),
+)
+```
+
+#### SDBreadcrumb
+
+```dart
+SDBreadcrumb(items: [
+  SDBreadcrumbItem(label: 'Home',     onTap: () {}),
+  SDBreadcrumbItem(label: 'Settings', onTap: () {}),
+  SDBreadcrumbItem(label: 'Profile'),  // current — no onTap
+])
+```
+
+#### SDStepIndicator
+
+```dart
+SDStepIndicator(
+  steps: ['Account', 'Profile', 'Confirm'],
+  currentStep: 1,  // 0-based
+)
+```
+
+---
+
 ## Animation Tokens
 
 ```dart
@@ -339,7 +411,7 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history and upcoming miles
 | **v0.2** ✅ | SDTextField, SDDropdown, SDMultiSelect, SDCheckbox, SDRadioGroup, SDSwitch, SDSlider, SDDatePicker, SDForm |
 | **v0.3** ✅ | SDCard, SDListItem, SDTable, SDBadge, SDAvatar, SDChip, SDTag |
 | **v0.4** ✅ | SDAlert, SDModal, SDSnackbar, SDToast, SDBottomSheet, SDProgressBar, SDSkeletonLoader |
-| v0.5 | SDAppBar, SDTabs, SDBottomNav, SDDrawer, SDBreadcrumb |
+| **v0.5** ✅ | SDAppBar, SDTabs, SDBottomNav, SDDrawer, SDBreadcrumb, SDStepIndicator |
 | v0.6 | SDAccordion, SDCarousel, SDBentoBox, SDEmptyState |
 | v0.7 | SDSplashScreen, SDLoginScreen, SDRegisterScreen, SDOnboardingScreen |
 | v1.0 | Full release |

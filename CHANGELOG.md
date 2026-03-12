@@ -6,6 +6,39 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v0.5.0] — 2026-03-12
+
+### Added — Components
+
+- **`SDAppBar`** — implements `PreferredSizeWidget`, wraps `AppBar`
+  - Parameters: `title`, `actions?`, `leading?`, `centerTitle`, `bottom?` (for `TabBar`)
+
+- **`SDTabs`** — self-contained tab bar + content
+  - Parameters: `tabs` (List<String>), `children` (List<Widget>), `contentHeight` (default 160)
+  - Uses `DefaultTabController` internally
+
+- **`SDBottomNav`** — wraps `NavigationBar`
+  - `SDBottomNavItem(label, icon, selectedIcon?)` for destination definitions
+  - Parameters: `items`, `selectedIndex`, `onDestinationSelected`
+
+- **`SDDrawer`** — wraps `NavigationDrawer`
+  - `SDDrawerItem(label, icon, selectedIcon?, onTap?)` for item definitions
+  - Parameters: `items`, `selectedIndex?`, `header?`, `onDestinationSelected?`
+
+- **`SDBreadcrumb`** — horizontal breadcrumb trail
+  - `SDBreadcrumbItem(label, onTap?)` — `null` onTap = current page
+  - Horizontally scrollable with chevron separators
+
+- **`SDStepIndicator`** — horizontal step progress
+  - Parameters: `steps` (List<String>), `currentStep` (int, 0-based)
+  - Completed steps show checkmark, active step highlighted, upcoming steps muted
+
+### Added — Showcase App
+
+- **Navigation screen** (`/navigation`) — fully implemented (was placeholder); uses `SDAppBar` as its own app bar
+
+---
+
 ## [v0.4.0] — 2026-03-12
 
 ### Added — Components
@@ -206,7 +239,7 @@ Versions follow [Semantic Versioning](https://semver.org/).
 | v0.2.0 | Forms & Inputs — `SDTextField`, `SDDropdown`, `SDCheckbox`, `SDRadio`, `SDSwitch`, `SDSlider`, `SDForm` |
 | v0.3.0 | Data Display — `SDCard`, `SDList`, `SDTable`, `SDBadge`, `SDAvatar`, `SDChip`, `SDTag` |
 | v0.4.0 ✅ | Feedback — `SDAlert`, `SDModal`, `SDSnackbar`, `SDToast`, `SDBottomSheet`, `SDProgressBar`, `SDSkeletonLoader` |
-| v0.5.0 | Navigation — `SDAppBar`, `SDTabs`, `SDBottomNav`, `SDDrawer`, `SDBreadcrumb` |
+| v0.5.0 ✅ | Navigation — `SDAppBar`, `SDTabs`, `SDBottomNav`, `SDDrawer`, `SDBreadcrumb`, `SDStepIndicator` |
 | v0.6.0 | Layout — `SDAccordion`, `SDCarousel`, `SDBentoBox`, `SDEmptyState` |
 | v0.7.0 | Entry Screens — `SDSplashScreen`, `SDLoginScreen`, `SDRegisterScreen`, `SDOnboardingScreen` |
 | v1.0.0 | Dark theme showcase, full README, release |
