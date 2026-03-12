@@ -722,5 +722,5 @@ Every component follows these rules — no exceptions:
 
 ## Requirements
 
-- Flutter 3.16+
-- Dart 3.0+
+- Flutter 3.10+
+- Dart 3.11+
