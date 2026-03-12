@@ -12,6 +12,7 @@
 .swiftpm/
 migrate_working_dir/
 # /docs
+Archive.zip
 
 # IntelliJ related
 *.iml
