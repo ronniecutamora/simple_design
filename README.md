@@ -2,7 +2,62 @@
 
 A clean, minimal Flutter design system. Any component works in 1–2 lines. Colors and typography come from Flutter's built-in theme system — no hardcoded values ever.
 
-**Current version:** v0.7.0 — Entry Screens
+---
+
+## Table of Contents
+
+- [Install](#install)
+- [Setup](#setup)
+- [Theming](#theming)
+- [Tokens](#tokens)
+  - [Animation Tokens](#animation-tokens)
+  - [Semantic Colors](#semantic-colors)
+- [Foundation](#foundation)
+  - [SDButton](#sdbutton)
+  - [SDText](#sdtext)
+  - [SDIconLabel](#sdiconlabel)
+  - [SDDivider](#sddivider)
+  - [SDSpinner](#sdspinner)
+- [Forms & Inputs](#forms--inputs)
+  - [SDTextField](#sdtextfield)
+  - [SDDropdown](#sddropdown)
+  - [SDMultiSelect](#sdmultiselect)
+  - [SDCheckbox / SDRadioGroup / SDSwitch](#sdcheckbox--sdradiogroup--sdswitch)
+  - [SDSlider / SDDatePicker / SDForm](#sdslider--sddatepicker--sdform)
+- [Data Display](#data-display)
+  - [SDCard](#sdcard)
+  - [SDListItem](#sdlistitem)
+  - [SDTable](#sdtable)
+  - [SDBadge / SDAvatar / SDChip / SDTag](#sdbadge--sdavatar--sdchip--sdtag)
+- [Feedback](#feedback)
+  - [SDAlert](#sdalert)
+  - [SDModal](#sdmodal)
+  - [SDSnackbar](#sdsnackbar)
+  - [SDToast](#sdtoast)
+  - [SDBottomSheet](#sdbottomsheet)
+  - [SDProgressBar](#sdprogressbar)
+  - [SDSkeletonLoader](#sdskeletonloader)
+- [Navigation](#navigation)
+  - [SDAppBar](#sdappbar)
+  - [SDTabs](#sdtabs)
+  - [SDBottomNav](#sdbottomnav)
+  - [SDDrawer](#sddrawer)
+  - [SDBreadcrumb](#sdbreadcrumb)
+  - [SDStepIndicator](#sdstepindicator)
+- [Layout](#layout)
+  - [SDDividerLabel](#sddividerlabel)
+  - [SDAccordion](#sdaccordion)
+  - [SDCarousel](#sdcarousel)
+  - [SDBentoBox](#sdbentobox)
+  - [SDEmptyState](#sdemptystate)
+- [Entry Screens](#entry-screens)
+  - [SDSplashScreen](#sdsplashscreen)
+  - [SDLoginScreen](#sdloginscreen)
+  - [SDRegisterScreen](#sdregisterscreen)
+  - [SDForgotPasswordScreen](#sdforgotpasswordscreen)
+  - [SDOnboardingScreen](#sdonboardingscreen)
+- [Design Rules](#design-rules)
+- [Requirements](#requirements)
 
 ---
 
@@ -14,39 +69,38 @@ dependencies:
   simple_design:
     git:
       url: https://github.com/your-org/sd_flutter.git
-      ref: v0.7.0
+      ref: main
 ```
 
-## Quick Start
+---
+
+## Setup
 
 ```dart
 import 'package:simple_design/simple_design.dart';
 
-// 1. Apply theme once in main.dart
-MaterialApp(
-  theme: SDTheme.light,
-  darkTheme: SDTheme.dark,
-  themeMode: ThemeMode.system, // auto light/dark
-)
+void main() => runApp(const MyApp());
 
-// 2. Use components anywhere
-SDButton.primary(label: 'Submit', onPressed: () {})
-SDButton.secondary(label: 'Cancel', onPressed: null)  // disabled
-SDButton.danger(label: 'Delete', onPressed: () {}, loading: true)
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-SDText.heading1('Hello')
-SDText.body('Some paragraph text')
-
-SDIconLabel(icon: Icons.home, label: 'Home')
-SDDivider.horizontal()
-SDSpinner()
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: SDTheme.light,
+      darkTheme: SDTheme.dark,
+      themeMode: ThemeMode.system, // auto light/dark
+      home: const HomeScreen(),
+    );
+  }
+}
 ```
 
 ---
 
 ## Theming
 
-One seed color generates the full accessible `ColorScheme` for both light and dark.
+One seed color generates the full accessible `ColorScheme` for both light and dark modes.
 
 ```dart
 // Default — subtle grey-blue
@@ -58,10 +112,9 @@ theme: SDTheme.withSeed(Color(0xFF4A90D9))
 darkTheme: SDTheme.withSeed(Color(0xFF4A90D9), brightness: Brightness.dark)
 ```
 
-In every component, colors are read from the active theme — never hardcoded:
+All components read colors from the active theme — never hardcoded:
 
 ```dart
-// Always — never hardcode
 Theme.of(context).colorScheme.surface
 Theme.of(context).colorScheme.primary
 Theme.of(context).textTheme.bodyMedium
@@ -69,7 +122,49 @@ Theme.of(context).textTheme.bodyMedium
 
 ---
 
-## Components — v0.5
+## Tokens
+
+### Animation Tokens
+
+```dart
+SDAnimation.fast    // 100ms — hover, press feedback
+SDAnimation.normal  // 200ms — expand, collapse
+SDAnimation.slow    // 350ms — modals, page transitions
+SDAnimation.curve   // Curves.easeInOut
+
+// Usage
+AnimatedContainer(duration: SDAnimation.normal, curve: SDAnimation.curve, ...)
+```
+
+### Semantic Colors
+
+`SDSemanticColors` extends the Flutter theme with success, info, and warning color pairs — both soft (container) variants for inline components like `SDAlert` and solid variants for floating components like `SDSnackbar`.
+
+Register automatically via `SDTheme.light` / `SDTheme.dark`. Access anywhere:
+
+```dart
+final sc = Theme.of(context).extension<SDSemanticColors>()!;
+
+// Soft — for inline alerts, banners
+sc.successContainer   // light green bg
+sc.onSuccessContainer // dark green text
+sc.infoContainer      // light blue bg
+sc.onInfoContainer    // dark blue text
+sc.warningContainer   // light amber bg
+sc.onWarningContainer // dark amber text
+
+// Solid — for snackbars, toasts
+sc.success   // green
+sc.onSuccess // white
+sc.info      // blue
+sc.onInfo    // white
+sc.warning   // amber
+sc.onWarning // white
+```
+
+---
+
+## Foundation
 
 ### SDButton
 
@@ -81,7 +176,7 @@ SDButton.ghost(label: 'Skip', onPressed: () {})
 SDButton.danger(label: 'Delete', onPressed: () {})
 
 // States
-SDButton.primary(label: 'Saving…', onPressed: null, loading: true)  // loading
+SDButton.primary(label: 'Saving…', onPressed: null, loading: true)  // loading spinner
 SDButton.primary(label: 'Disabled', onPressed: null)                // disabled
 
 // With icon
@@ -130,17 +225,25 @@ SDDivider.vertical(height: 24)
 ### SDSpinner
 
 ```dart
-SDSpinner()                           // 24dp, theme primary color
-SDSpinner(size: 20, color: Colors.white)  // inside buttons
+SDSpinner()                                // 24dp, theme primary color
+SDSpinner(size: 20, color: Colors.white)   // inside buttons
 ```
+
+---
+
+## Forms & Inputs
 
 ### SDTextField
 
 ```dart
 SDTextField(label: 'Email', hint: 'you@example.com', onChanged: (v) {})
-SDTextField(label: 'Name', errorText: 'Required')         // error state
-SDTextField(label: 'Locked', enabled: false)              // disabled
-SDTextField(label: 'Password', obscureText: true, validator: (v) => v!.isEmpty ? 'Required' : null)
+SDTextField(label: 'Name', errorText: 'Required')          // error state
+SDTextField(label: 'Locked', enabled: false)               // disabled
+SDTextField(
+  label: 'Password',
+  obscureText: true,
+  validator: (v) => v!.isEmpty ? 'Required' : null,
+)
 ```
 
 ### SDDropdown
@@ -199,6 +302,8 @@ SDForm(
 
 ---
 
+## Data Display
+
 ### SDCard
 
 ```dart
@@ -212,16 +317,30 @@ SDCard.elevated(child: Text('Tappable'), onTap: () {})   // adds ripple
 
 ```dart
 SDListItem(title: 'Simple row')
-SDListItem(title: 'Jane Smith', subtitle: 'Admin', leading: SDAvatar.initials(initials: 'JS'))
-SDListItem(title: 'Alerts', trailing: SDBadge.count(count: 3), onTap: () {})
+SDListItem(
+  title: 'Jane Smith',
+  subtitle: 'Admin',
+  leading: SDAvatar.initials(initials: 'JS'),
+)
+SDListItem(
+  title: 'Alerts',
+  trailing: SDBadge.count(count: 3),
+  onTap: () {},
+)
 ```
 
 ### SDTable
 
 ```dart
 SDTable(
-  columns: [SDTableColumn(label: 'Name'), SDTableColumn(label: 'Score', numeric: true)],
-  rows: [[Text('Alice'), Text('95')], [Text('Bob'), Text('87')]],
+  columns: [
+    SDTableColumn(label: 'Name'),
+    SDTableColumn(label: 'Score', numeric: true),
+  ],
+  rows: [
+    [Text('Alice'), Text('95')],
+    [Text('Bob'),   Text('87')],
+  ],
 )
 ```
 
@@ -246,9 +365,11 @@ SDTag(label: 'Error', color: Theme.of(context).colorScheme.errorContainer)
 
 ---
 
-### v0.4 — Feedback
+## Feedback
 
-#### SDAlert
+### SDAlert
+
+Inline banners with semantic color shading — green for success, blue for info, amber for warning, red for error.
 
 ```dart
 SDAlert.info(message: 'Session expires soon.')
@@ -257,43 +378,60 @@ SDAlert.warning(message: 'Storage almost full.', onDismiss: () {})
 SDAlert.error(message: 'Connection failed.', title: 'Error', onDismiss: () {})
 ```
 
-#### SDModal
+### SDModal
 
 ```dart
-SDModal.show(context, title: 'Save?', body: 'Unsaved changes will be lost.', onConfirm: () {})
-SDModal.showDestructive(context, title: 'Delete?', body: 'This cannot be undone.', onConfirm: () {})
+SDModal.show(
+  context,
+  title: 'Save changes?',
+  body: 'Unsaved changes will be lost.',
+  onConfirm: () {},
+)
+SDModal.showDestructive(
+  context,
+  title: 'Delete account?',
+  body: 'This action cannot be undone.',
+  onConfirm: () {},
+)
 ```
 
-#### SDSnackbar
+### SDSnackbar
 
 ```dart
 SDSnackbar.show(context, message: 'Changes saved')
 SDSnackbar.show(context, message: 'Item deleted', actionLabel: 'Undo', onAction: () {})
-SDSnackbar.showError(context, message: 'Failed to save')  // cs.error bg, cs.onError text
+SDSnackbar.showSuccess(context, message: 'Profile updated!')
+SDSnackbar.showInfo(context, message: 'Sync in progress…')
+SDSnackbar.showWarning(context, message: 'Storage almost full.')
+SDSnackbar.showError(context, message: 'Failed to save')
 ```
 
-#### SDToast
+### SDToast
 
 ```dart
 SDToast.show(context, message: 'Copied to clipboard')
 SDToast.show(context, message: 'Upload complete', icon: Icons.cloud_done_outlined)
 ```
 
-#### SDBottomSheet
+### SDBottomSheet
 
 ```dart
-SDBottomSheet.show(context, title: 'Options', child: Column(children: [...]))
+SDBottomSheet.show(
+  context,
+  title: 'Share via',
+  child: Column(children: [...]),
+)
 ```
 
-#### SDProgressBar
+### SDProgressBar
 
 ```dart
 SDProgressBar()                                // indeterminate
 SDProgressBar(value: 0.6)                      // 60%
-SDProgressBar(value: 0.4, label: 'Uploading…') // with label + %
+SDProgressBar(value: 0.4, label: 'Uploading…') // with label + percentage
 ```
 
-#### SDSkeletonLoader
+### SDSkeletonLoader
 
 ```dart
 SDSkeletonLoader(width: double.infinity, height: 16)    // text line
@@ -303,17 +441,20 @@ SDSkeletonLoader.card()                                  // card preset
 
 ---
 
-### v0.5 — Navigation
+## Navigation
 
-#### SDAppBar
+### SDAppBar
 
 ```dart
 Scaffold(appBar: SDAppBar(title: 'Home'))
-Scaffold(appBar: SDAppBar(title: 'Search', actions: [IconButton(icon: Icon(Icons.search), onPressed: () {})]))
+Scaffold(appBar: SDAppBar(
+  title: 'Search',
+  actions: [IconButton(icon: Icon(Icons.search), onPressed: () {})],
+))
 Scaffold(appBar: SDAppBar(title: 'Details', leading: BackButton(), centerTitle: true))
 ```
 
-#### SDTabs
+### SDTabs
 
 ```dart
 SDTabs(
@@ -323,7 +464,7 @@ SDTabs(
 SDTabs(tabs: ['A', 'B'], children: [...], contentHeight: 200)
 ```
 
-#### SDBottomNav
+### SDBottomNav
 
 ```dart
 Scaffold(
@@ -338,7 +479,7 @@ Scaffold(
 )
 ```
 
-#### SDDrawer
+### SDDrawer
 
 ```dart
 Scaffold(
@@ -354,17 +495,17 @@ Scaffold(
 )
 ```
 
-#### SDBreadcrumb
+### SDBreadcrumb
 
 ```dart
 SDBreadcrumb(items: [
   SDBreadcrumbItem(label: 'Home',     onTap: () {}),
   SDBreadcrumbItem(label: 'Settings', onTap: () {}),
-  SDBreadcrumbItem(label: 'Profile'),  // current — no onTap
+  SDBreadcrumbItem(label: 'Profile'),  // current page — no onTap
 ])
 ```
 
-#### SDStepIndicator
+### SDStepIndicator
 
 ```dart
 SDStepIndicator(
@@ -375,9 +516,9 @@ SDStepIndicator(
 
 ---
 
-### v0.6 — Layout
+## Layout
 
-#### SDDividerLabel
+### SDDividerLabel
 
 ```dart
 SDDividerLabel(label: 'OR')
@@ -385,12 +526,12 @@ SDDividerLabel(label: 'TODAY')
 SDDividerLabel(label: 'Section Title', style: Theme.of(context).textTheme.labelSmall)
 ```
 
-#### SDAccordion
+### SDAccordion
 
 ```dart
 SDAccordion(
   items: [
-    SDAccordionItem(title: 'What is Flutter?',   child: Text('A UI toolkit by Google.')),
+    SDAccordionItem(title: 'What is Flutter?',      child: Text('A UI toolkit by Google.')),
     SDAccordionItem(title: 'Why use this package?', child: Text('1–2 line components.')),
   ],
 )
@@ -399,7 +540,7 @@ SDAccordion(
 SDAccordion(allowMultiple: true, items: [...])
 ```
 
-#### SDCarousel
+### SDCarousel
 
 ```dart
 // Full-width slides
@@ -412,7 +553,7 @@ SDCarousel(
 SDCarousel(height: 180, viewportFraction: 0.85, children: [...])
 ```
 
-#### SDBentoBox
+### SDBentoBox
 
 ```dart
 SDBentoBox(
@@ -427,7 +568,7 @@ SDBentoBox(
 )
 ```
 
-#### SDEmptyState
+### SDEmptyState
 
 ```dart
 SDEmptyState(
@@ -436,7 +577,7 @@ SDEmptyState(
   message: 'Your saved items will appear here.',
 )
 
-// With action
+// With action button
 SDEmptyState(
   icon: Icons.search_off_outlined,
   title: 'No results',
@@ -447,14 +588,14 @@ SDEmptyState(
 
 ---
 
-### v0.7 — Entry Screens
+## Entry Screens
 
-All entry screens accept a `Widget? logo` parameter that takes any widget — `Image.asset`, `SvgPicture.asset`, `FlutterLogo`, `Icon`, etc.
+All entry screens accept a `Widget? logo` parameter that accepts any widget — `Image.asset`, `SvgPicture.asset`, `FlutterLogo`, `Icon`, etc.
 
-#### SDSplashScreen
+### SDSplashScreen
 
 ```dart
-// Minimal — no logo, auto-navigates after 2 seconds
+// Minimal — auto-navigates after 2 seconds
 SDSplashScreen(onComplete: () => context.go('/home'))
 
 // With logo and title
@@ -466,12 +607,14 @@ SDSplashScreen(
 )
 ```
 
-#### SDLoginScreen
+### SDLoginScreen
 
 ```dart
 // Minimal
 SDLoginScreen(
-  onLogin: (email, password) async { /* authenticate */ },
+  onLogin: (email, password) async {
+    await Auth.signIn(email, password);
+  },
 )
 
 // Full
@@ -479,71 +622,71 @@ SDLoginScreen(
   logo: FlutterLogo(size: 64),
   title: 'Welcome back',
   subtitle: 'Sign in to continue',
-  onLogin: (email, password) async { /* authenticate */ },
+  onLogin: (email, password) async {
+    await Auth.signIn(email, password);
+  },
   onForgotPassword: () => context.go('/forgot-password'),
   onRegister: () => context.go('/register'),
+  onBack: () => Navigator.of(context).pop(),
 )
 ```
 
-#### SDRegisterScreen
+`onLogin` is `Future<void> Function(String email, String password)`. Throw any exception to display an inline error message.
+
+### SDRegisterScreen
 
 ```dart
 SDRegisterScreen(
   logo: Image.asset('assets/logo.png', width: 80),
   title: 'Create account',
   subtitle: 'Join us today',
-  onRegister: (name, email, password) async { /* create account */ },
+  onRegister: (name, email, password) async {
+    await Auth.createUser(name, email, password);
+  },
   onLogin: () => context.go('/login'),
+  onBack: () => Navigator.of(context).pop(),
 )
 ```
 
-#### SDForgotPasswordScreen
+`onRegister` is `Future<void> Function(String name, String email, String password)`. Throw to show an inline error.
+
+### SDForgotPasswordScreen
 
 ```dart
 SDForgotPasswordScreen(
   logo: FlutterLogo(size: 64),
-  onSendLink: (email) async { /* send reset email */ },
+  onSendLink: (email) async {
+    await Auth.sendPasswordReset(email);
+  },
   onBack: () => context.go('/login'),
 )
 ```
 
-#### SDOnboardingScreen
+Shows a success confirmation state after `onSendLink` resolves. Throw to show an error.
+
+### SDOnboardingScreen
 
 ```dart
 SDOnboardingScreen(
   pages: [
     SDOnboardingPage(
       title: 'Welcome',
-      body: 'Discover what the app can do.',
-      image: Image.asset('assets/onboarding_1.png'),
+      description: 'Discover what the app can do.',
+      illustration: Image.asset('assets/onboarding_1.png'),
     ),
     SDOnboardingPage(
       title: 'Stay organised',
-      body: 'Everything in one place.',
-      image: Image.asset('assets/onboarding_2.png'),
+      description: 'Everything in one place.',
+      illustration: Image.asset('assets/onboarding_2.png'),
     ),
     SDOnboardingPage(
       title: "You're ready",
-      body: "Let's get started.",
+      description: "Let's get started.",
     ),
   ],
   onComplete: () => context.go('/home'),
-  onSkip: () => context.go('/home'),
+  onSkip: () => context.go('/home'),  // omit to hide the Skip button
 )
-```
-
----
-
-## Animation Tokens
-
-```dart
-SDAnimation.fast    // 100ms — hover, press feedback
-SDAnimation.normal  // 200ms — expand, collapse
-SDAnimation.slow    // 350ms — modals, page transitions
-SDAnimation.curve   // Curves.easeInOut
-
-// Usage
-AnimatedContainer(duration: SDAnimation.normal, curve: SDAnimation.curve, ...)
 ```
 
 ---
@@ -560,24 +703,7 @@ Every component follows these rules — no exceptions:
 
 ---
 
-## Roadmap
-
-See [CHANGELOG.md](CHANGELOG.md) for the full version history and upcoming milestones.
-
-| Version | Components |
-|---|---|
-| **v0.1** ✅ | Tokens, SDTheme, SDButton, SDText, SDIconLabel, SDDivider, SDSpinner |
-| **v0.2** ✅ | SDTextField, SDDropdown, SDMultiSelect, SDCheckbox, SDRadioGroup, SDSwitch, SDSlider, SDDatePicker, SDForm |
-| **v0.3** ✅ | SDCard, SDListItem, SDTable, SDBadge, SDAvatar, SDChip, SDTag |
-| **v0.4** ✅ | SDAlert, SDModal, SDSnackbar, SDToast, SDBottomSheet, SDProgressBar, SDSkeletonLoader |
-| **v0.5** ✅ | SDAppBar, SDTabs, SDBottomNav, SDDrawer, SDBreadcrumb, SDStepIndicator |
-| **v0.6** ✅ | SDDividerLabel, SDAccordion, SDCarousel, SDBentoBox, SDEmptyState |
-| **v0.7** ✅ | SDSplashScreen, SDLoginScreen, SDRegisterScreen, SDForgotPasswordScreen, SDOnboardingScreen |
-| v1.0 | Full release |
-
----
-
 ## Requirements
 
-- Flutter 3.10+
+- Flutter 3.16+
 - Dart 3.0+
