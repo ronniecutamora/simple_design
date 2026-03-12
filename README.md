@@ -1,17 +1,185 @@
 # simple_design
 
-A new Flutter project.
+A clean, minimal Flutter design system. Any component works in 1–2 lines. Colors and typography come from Flutter's built-in theme system — no hardcoded values ever.
 
-## Getting Started
+**Current version:** v0.1.0 — Foundation
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## Install
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```yaml
+# pubspec.yaml
+dependencies:
+  simple_design:
+    git:
+      url: https://github.com/your-org/sd_flutter.git
+      ref: v0.1.0
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Quick Start
+
+```dart
+import 'package:simple_design/simple_design.dart';
+
+// 1. Apply theme once in main.dart
+MaterialApp(
+  theme: SDTheme.light,
+  darkTheme: SDTheme.dark,
+  themeMode: ThemeMode.system, // auto light/dark
+)
+
+// 2. Use components anywhere
+SDButton.primary(label: 'Submit', onPressed: () {})
+SDButton.secondary(label: 'Cancel', onPressed: null)  // disabled
+SDButton.danger(label: 'Delete', onPressed: () {}, loading: true)
+
+SDText.heading1('Hello')
+SDText.body('Some paragraph text')
+
+SDIconLabel(icon: Icons.home, label: 'Home')
+SDDivider.horizontal()
+SDSpinner()
+```
+
+---
+
+## Theming
+
+One seed color generates the full accessible `ColorScheme` for both light and dark.
+
+```dart
+// Default — subtle grey-blue
+theme: SDTheme.light
+darkTheme: SDTheme.dark
+
+// Custom brand color — change one value, everything updates
+theme: SDTheme.withSeed(Color(0xFF4A90D9))
+darkTheme: SDTheme.withSeed(Color(0xFF4A90D9), brightness: Brightness.dark)
+```
+
+In every component, colors are read from the active theme — never hardcoded:
+
+```dart
+// Always — never hardcode
+Theme.of(context).colorScheme.surface
+Theme.of(context).colorScheme.primary
+Theme.of(context).textTheme.bodyMedium
+```
+
+---
+
+## Components — v0.1
+
+### SDButton
+
+```dart
+// 4 variants
+SDButton.primary(label: 'Save', onPressed: () {})
+SDButton.secondary(label: 'Cancel', onPressed: () {})
+SDButton.ghost(label: 'Skip', onPressed: () {})
+SDButton.danger(label: 'Delete', onPressed: () {})
+
+// States
+SDButton.primary(label: 'Saving…', onPressed: null, loading: true)  // loading
+SDButton.primary(label: 'Disabled', onPressed: null)                // disabled
+
+// With icon
+SDButton.primary(label: 'Add', onPressed: () {}, leadingIcon: Icons.add)
+
+// Full width
+SDButton.primary(label: 'Continue', onPressed: () {}, fullWidth: true)
+```
+
+All variants enforce a 48dp minimum touch target and include `Semantics` automatically.
+
+### SDText
+
+```dart
+SDText.displayLg('Big Title')
+SDText.heading1('Page Title')
+SDText.heading2('Section')
+SDText.heading3('Subsection')
+SDText.bodyLg('Intro paragraph')
+SDText.body('Standard body text')
+SDText.bodySm('Fine print')
+SDText.label('FIELD LABEL')
+SDText.caption('Last updated today')
+
+// With overrides
+SDText.body('Muted text', color: Theme.of(context).colorScheme.onSurfaceVariant)
+SDText.body('Centered', textAlign: TextAlign.center)
+SDText.body('Truncated', maxLines: 2, overflow: TextOverflow.ellipsis)
+```
+
+### SDIconLabel
+
+```dart
+// Icon and label — always together, never a bare Icon()
+SDIconLabel(icon: Icons.home, label: 'Home')
+SDIconLabel(icon: Icons.settings, label: 'Settings', iconSize: 16)
+```
+
+### SDDivider
+
+```dart
+SDDivider.horizontal()
+SDDivider.vertical(height: 24)
+```
+
+### SDSpinner
+
+```dart
+SDSpinner()                           // 24dp, theme primary color
+SDSpinner(size: 20, color: Colors.white)  // inside buttons
+```
+
+---
+
+## Animation Tokens
+
+```dart
+SDAnimation.fast    // 100ms — hover, press feedback
+SDAnimation.normal  // 200ms — expand, collapse
+SDAnimation.slow    // 350ms — modals, page transitions
+SDAnimation.curve   // Curves.easeInOut
+
+// Usage
+AnimatedContainer(duration: SDAnimation.normal, curve: SDAnimation.curve, ...)
+```
+
+---
+
+## Design Rules
+
+Every component follows these rules — no exceptions:
+
+1. **Theme only** — no hardcoded colors, sizes, or spacing
+2. **All 5 states** — default → focused → pressed → loading → disabled
+3. **48dp minimum touch target** — enforced on all interactive components
+4. **Icon + label always together** — use `SDIconLabel`, never a bare `Icon()`
+5. **Semantics on every interactive widget**
+
+---
+
+## Roadmap
+
+See [CHANGELOG.md](CHANGELOG.md) for the full version history and upcoming milestones.
+
+| Version | Components |
+|---|---|
+| **v0.1** ✅ | Tokens, SDTheme, SDButton, SDText, SDIconLabel, SDDivider, SDSpinner |
+| v0.2 | SDTextField, SDDropdown, SDCheckbox, SDRadio, SDSwitch, SDSlider, SDForm |
+| v0.3 | SDCard, SDList, SDTable, SDBadge, SDAvatar, SDChip, SDTag |
+| v0.4 | SDAlert, SDModal, SDSnackbar, SDToast, SDBottomSheet, SDProgressBar |
+| v0.5 | SDAppBar, SDTabs, SDBottomNav, SDDrawer, SDBreadcrumb |
+| v0.6 | SDAccordion, SDCarousel, SDBentoBox, SDEmptyState |
+| v0.7 | SDSplashScreen, SDLoginScreen, SDRegisterScreen, SDOnboardingScreen |
+| v1.0 | Full release |
+
+---
+
+## Requirements
+
+- Flutter 3.10+
+- Dart 3.0+
