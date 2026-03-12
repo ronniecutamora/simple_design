@@ -25,6 +25,7 @@ class SDRegisterScreen extends StatefulWidget {
     this.subtitle,
     required this.onRegister,
     this.onLogin,
+    this.onBack,
   });
 
   /// Widget displayed above the form.
@@ -43,6 +44,9 @@ class SDRegisterScreen extends StatefulWidget {
 
   /// Called when the user taps 'Sign in'. Pass null to hide the link.
   final VoidCallback? onLogin;
+
+  /// Called when the user taps the back arrow in the app bar. Pass null to hide it.
+  final VoidCallback? onBack;
 
   @override
   State<SDRegisterScreen> createState() => _SDRegisterScreenState();
@@ -90,6 +94,9 @@ class _SDRegisterScreenState extends State<SDRegisterScreen> {
     final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
     return Scaffold(
+      appBar: widget.onBack != null
+          ? AppBar(leading: BackButton(onPressed: widget.onBack))
+          : null,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),

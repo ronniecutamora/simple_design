@@ -45,6 +45,7 @@ class EntryScreensScreen extends StatelessWidget {
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
               builder: (ctx) => SDLoginScreen(
                 logo: const FlutterLogo(size: 64),
+                onBack: () => Navigator.of(ctx).pop(),
                 onLogin: (email, password) async {
                   await Future.delayed(const Duration(seconds: 1));
                   if (password.length < 6) {
@@ -63,6 +64,7 @@ class EntryScreensScreen extends StatelessWidget {
                 onRegister: () => Navigator.of(ctx).push(MaterialPageRoute(
                   builder: (ctx2) => SDRegisterScreen(
                     logo: const FlutterLogo(size: 64),
+                    onBack: () => Navigator.of(ctx2).pop(),
                     onRegister: (name, email, password) async {
                       await Future.delayed(const Duration(seconds: 1));
                     },
@@ -85,12 +87,13 @@ class EntryScreensScreen extends StatelessWidget {
             label: 'Preview Register Screen',
             leadingIcon: Icons.person_add_outlined,
             onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => SDRegisterScreen(
+              builder: (ctx) => SDRegisterScreen(
                 logo: const FlutterLogo(size: 64),
+                onBack: () => Navigator.of(ctx).pop(),
                 onRegister: (name, email, password) async {
                   await Future.delayed(const Duration(seconds: 1));
                 },
-                onLogin: () => Navigator.of(context).pop(),
+                onLogin: () => Navigator.of(ctx).pop(),
               ),
             )),
           ),

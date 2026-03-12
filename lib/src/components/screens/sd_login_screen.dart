@@ -27,6 +27,7 @@ class SDLoginScreen extends StatefulWidget {
     required this.onLogin,
     this.onForgotPassword,
     this.onRegister,
+    this.onBack,
   });
 
   /// Widget displayed above the form.
@@ -48,6 +49,9 @@ class SDLoginScreen extends StatefulWidget {
 
   /// Called when the user taps 'Register'. Pass null to hide the link.
   final VoidCallback? onRegister;
+
+  /// Called when the user taps the back arrow in the app bar. Pass null to hide it.
+  final VoidCallback? onBack;
 
   @override
   State<SDLoginScreen> createState() => _SDLoginScreenState();
@@ -87,6 +91,9 @@ class _SDLoginScreenState extends State<SDLoginScreen> {
     final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
     return Scaffold(
+      appBar: widget.onBack != null
+          ? AppBar(leading: BackButton(onPressed: widget.onBack))
+          : null,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),

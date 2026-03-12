@@ -74,6 +74,9 @@ class _SDForgotPasswordScreenState extends State<SDForgotPasswordScreen> {
     final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
     return Scaffold(
+      appBar: widget.onBack != null
+          ? AppBar(leading: BackButton(onPressed: widget.onBack))
+          : null,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -115,15 +118,6 @@ class _SDForgotPasswordScreenState extends State<SDForgotPasswordScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (widget.onBack != null)
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: widget.onBack,
-                style: IconButton.styleFrom(minimumSize: const Size(48, 48)),
-              ),
-            ),
           const SizedBox(height: 16),
           if (widget.logo != null) ...[
             Center(child: widget.logo!),
