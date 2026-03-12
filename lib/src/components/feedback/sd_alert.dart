@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../tokens/sd_semantic_colors.dart';
 
 enum SDAlertVariant { info, success, warning, error }
 
@@ -79,12 +80,13 @@ class SDAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final tt = Theme.of(context).textTheme;
+    final sc = Theme.of(context).extension<SDSemanticColors>()!;
 
     final (bg, fg, icon) = switch (variant) {
-      SDAlertVariant.info    => (cs.secondaryContainer,  cs.onSecondaryContainer,  Icons.info_outline),
-      SDAlertVariant.success => (cs.tertiaryContainer,   cs.onTertiaryContainer,   Icons.check_circle_outline),
-      SDAlertVariant.warning => (cs.primaryContainer,      cs.onPrimaryContainer,    Icons.warning_amber_outlined),
-      SDAlertVariant.error   => (cs.errorContainer,      cs.onErrorContainer,      Icons.error_outline),
+      SDAlertVariant.info    => (sc.infoContainer,    sc.onInfoContainer,    Icons.info_outline),
+      SDAlertVariant.success => (sc.successContainer, sc.onSuccessContainer, Icons.check_circle_outline),
+      SDAlertVariant.warning => (sc.warningContainer, sc.onWarningContainer, Icons.warning_amber_outlined),
+      SDAlertVariant.error   => (cs.errorContainer,   cs.onErrorContainer,   Icons.error_outline),
     };
 
     return Semantics(

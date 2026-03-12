@@ -1,5 +1,6 @@
 // Tokens
 export 'src/tokens/sd_animation.dart';
+export 'src/tokens/sd_semantic_colors.dart';
 
 // Theme
 export 'src/theme/sd_theme.dart';

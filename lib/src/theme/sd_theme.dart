@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../tokens/sd_semantic_colors.dart';
 
 /// Generates light and dark [ThemeData] from a single seed color.
 ///
@@ -45,5 +46,10 @@ class SDTheme {
           brightness: brightness,
         ),
         useMaterial3: true,
+        extensions: [
+          brightness == Brightness.light
+              ? SDSemanticColors.light
+              : SDSemanticColors.dark,
+        ],
       );
 }

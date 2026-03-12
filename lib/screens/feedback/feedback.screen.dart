@@ -82,11 +82,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             children: [
               SDButton.primary(
                 label: 'Default',
-                leadingIcon: Icons.check,
-                onPressed: () => SDSnackbar.show(
-                  context,
-                  message: 'Changes saved successfully.',
-                ),
+                onPressed: () => SDSnackbar.show(context, message: 'Changes saved.'),
               ),
               SDButton.secondary(
                 label: 'With action',
@@ -94,19 +90,24 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   context,
                   message: 'Item deleted.',
                   actionLabel: 'Undo',
-                  onAction: () => SDSnackbar.show(
-                    context,
-                    message: 'Undo successful.',
-                  ),
+                  onAction: () => SDSnackbar.show(context, message: 'Undo successful.'),
                 ),
+              ),
+              SDButton.ghost(
+                label: 'Success',
+                onPressed: () => SDSnackbar.showSuccess(context, message: 'Profile updated!'),
+              ),
+              SDButton.ghost(
+                label: 'Info',
+                onPressed: () => SDSnackbar.showInfo(context, message: 'Sync in progress…'),
+              ),
+              SDButton.ghost(
+                label: 'Warning',
+                onPressed: () => SDSnackbar.showWarning(context, message: 'Storage almost full.'),
               ),
               SDButton.danger(
                 label: 'Error',
-                onPressed: () => SDSnackbar.showError(
-                  context,
-                  message: 'Failed to save. Try again.',
-                  actionLabel: 'Retry',
-                ),
+                onPressed: () => SDSnackbar.showError(context, message: 'Failed to save. Try again.'),
               ),
             ],
           ),
