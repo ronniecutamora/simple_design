@@ -12,6 +12,8 @@ class ShowcaseShell extends StatelessWidget {
     NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
     NavigationDestination(icon: Icon(Icons.smart_button_outlined), selectedIcon: Icon(Icons.smart_button), label: 'Buttons'),
     NavigationDestination(icon: Icon(Icons.edit_note_outlined), selectedIcon: Icon(Icons.edit_note), label: 'Forms'),
+    NavigationDestination(icon: Icon(Icons.style_outlined), selectedIcon: Icon(Icons.style), label: 'Cards'),
+    NavigationDestination(icon: Icon(Icons.table_chart_outlined), selectedIcon: Icon(Icons.table_chart), label: 'Data'),
   ];
 
   @override

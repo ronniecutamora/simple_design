@@ -6,6 +6,98 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v0.3.0] — 2026-03-12
+
+### Added — Components
+
+- **`SDCard`** — 3 variants matching Material 3 card types
+  - `.elevated()` — default shadow card
+  - `.filled()` — `colorScheme.surfaceContainerHighest`, no shadow
+  - `.outlined()` — `colorScheme.outline` border
+  - Parameters: `child`, `onTap` (adds ripple + Semantics), `padding` (default 16dp)
+
+- **`SDListItem`** — single themed list row
+  - Parameters: `title`, `subtitle`, `leading`, `trailing`, `onTap`, `enabled`
+  - Wraps `ListTile` (56dp height, semantics built-in)
+
+- **`SDTable`** — data table with horizontal scroll
+  - `SDTableColumn(label, {numeric})` for column definitions
+  - `rows` accepts `List<List<Widget>>`
+  - Wraps `DataTable` in `SingleChildScrollView(Axis.horizontal)`
+
+- **`SDBadge`** — small indicator badge
+  - `.count({required int count})` — numbered circle; shows `99+` above 99
+  - `.dot()` — 8dp dot
+  - Colors: `colorScheme.error` / `colorScheme.onError`
+
+- **`SDAvatar`** — circular avatar
+  - `.initials({required String initials, double size = 40})`
+  - `.icon({required IconData icon, double size = 40})`
+  - `.image({required ImageProvider image, double size = 40})`
+  - Colors: `colorScheme.primaryContainer` / `colorScheme.onPrimaryContainer`
+
+- **`SDChip`** — 3 variants matching Material 3 chip types
+  - `.filter({label, selected, onSelected, icon, enabled})` → `FilterChip`
+  - `.action({label, onPressed, icon})` → `ActionChip`
+  - `.input({label, onDeleted, icon, enabled})` → `InputChip`
+  - `Semantics` wrapper on all variants
+
+- **`SDTag`** — non-interactive status label
+  - Parameters: `label`, `color` (default `colorScheme.secondaryContainer`)
+  - `labelSmall` typography, `BorderRadius.circular(4)`
+
+### Added — Showcase App
+
+- **Cards screen** (`/cards`) — all 3 card variants + composition examples
+- **Data Display screen** (`/data`) — list items, table, badges, avatars, chips, tags
+
+---
+
+## [v0.2.0] — 2026-03-12
+
+### Added — Components
+
+- **`SDTextField`** — text input with label, hint, error, disabled states
+  - Parameters: `controller`, `label`, `hint`, `errorText`, `onChanged`, `enabled`, `obscureText`, `keyboardType`, `validator`, `textInputAction`, `onFieldSubmitted`
+  - Wraps `TextFormField` with `InputDecoration(border: OutlineInputBorder())`
+
+- **`SDDropdown<T>`** — single-select dropdown
+  - `SDDropdownItem<T>(value, label)` for item definitions
+  - Parameters: `items`, `value`, `label`, `hint`, `onChanged`, `enabled`
+
+- **`SDMultiSelect<T>`** — multi-select via dialog
+  - Opens `AlertDialog` with `CheckboxListTile` list
+  - Displays selected labels comma-separated in trigger field
+
+- **`SDCheckbox`** — labeled checkbox
+  - Parameters: `label`, `value`, `onChanged`, `enabled`
+  - Wraps `CheckboxListTile` (48dp touch target built-in)
+
+- **`SDRadioGroup<T>`** + **`SDRadioOption<T>`** — radio group
+  - Parameters: `value`, `options`, `onChanged`, `label`, `enabled`
+  - Uses Material 3 `RadioGroup` + `RadioListTile`
+
+- **`SDSwitch`** — labeled toggle
+  - Parameters: `label`, `value`, `onChanged`, `enabled`
+  - Wraps `SwitchListTile`
+
+- **`SDSlider`** — range input
+  - Parameters: `value`, `onChanged`, `min`, `max`, `divisions`, `label`, `enabled`
+  - 48dp height enforced via `SizedBox`
+
+- **`SDDatePicker`** — tappable date field
+  - Calls `showDatePicker()` on tap; formats as `YYYY-MM-DD`
+  - Parameters: `value`, `onChanged`, `label`, `enabled`, `firstDate`, `lastDate`
+
+- **`SDForm`** — thin `Form` wrapper
+  - Parameters: `formKey`, `child`
+
+### Added — Showcase App
+
+- **Forms screen** (`/forms`) — all 9 input components + full validated form example
+
+---
+
 ## [v0.1.0] — 2026-03-12
 
 ### Added — Tokens

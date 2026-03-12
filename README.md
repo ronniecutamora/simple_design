@@ -2,7 +2,7 @@
 
 A clean, minimal Flutter design system. Any component works in 1–2 lines. Colors and typography come from Flutter's built-in theme system — no hardcoded values ever.
 
-**Current version:** v0.1.0 — Foundation
+**Current version:** v0.3.0 — Data Display
 
 ---
 
@@ -14,7 +14,7 @@ dependencies:
   simple_design:
     git:
       url: https://github.com/your-org/sd_flutter.git
-      ref: v0.1.0
+      ref: v0.3.0
 ```
 
 ## Quick Start
@@ -69,7 +69,7 @@ Theme.of(context).textTheme.bodyMedium
 
 ---
 
-## Components — v0.1
+## Components — v0.3
 
 ### SDButton
 
@@ -134,6 +134,116 @@ SDSpinner()                           // 24dp, theme primary color
 SDSpinner(size: 20, color: Colors.white)  // inside buttons
 ```
 
+### SDTextField
+
+```dart
+SDTextField(label: 'Email', hint: 'you@example.com', onChanged: (v) {})
+SDTextField(label: 'Name', errorText: 'Required')         // error state
+SDTextField(label: 'Locked', enabled: false)              // disabled
+SDTextField(label: 'Password', obscureText: true, validator: (v) => v!.isEmpty ? 'Required' : null)
+```
+
+### SDDropdown
+
+```dart
+SDDropdown<String>(
+  label: 'Country',
+  items: [SDDropdownItem(value: 'us', label: 'United States')],
+  value: _country,
+  onChanged: (v) => setState(() => _country = v),
+)
+```
+
+### SDMultiSelect
+
+```dart
+SDMultiSelect<String>(
+  label: 'Tags',
+  items: [SDDropdownItem(value: 'dart', label: 'Dart')],
+  selected: _selected,
+  onChanged: (v) => setState(() => _selected = v),
+)
+```
+
+### SDCheckbox / SDRadioGroup / SDSwitch
+
+```dart
+SDCheckbox(label: 'Accept terms', value: _checked, onChanged: (v) {})
+
+SDRadioGroup<String>(
+  label: 'Plan',
+  value: _plan,
+  options: [SDRadioOption(value: 'free', label: 'Free')],
+  onChanged: (v) {},
+)
+
+SDSwitch(label: 'Notifications', value: _on, onChanged: (v) {})
+```
+
+### SDSlider / SDDatePicker / SDForm
+
+```dart
+SDSlider(value: _volume, onChanged: (v) {}, min: 0, max: 1, divisions: 10)
+
+SDDatePicker(label: 'Birth date', value: _date, onChanged: (d) {})
+
+final _key = GlobalKey<FormState>();
+SDForm(
+  formKey: _key,
+  child: Column(children: [
+    SDTextField(label: 'Name', validator: (v) => v!.isEmpty ? 'Required' : null),
+    SDButton.primary(label: 'Submit', onPressed: () => _key.currentState!.validate()),
+  ]),
+)
+```
+
+---
+
+### SDCard
+
+```dart
+SDCard.elevated(child: Text('Elevated card'))
+SDCard.filled(child: Text('Filled card'))
+SDCard.outlined(child: Text('Outlined card'))
+SDCard.elevated(child: Text('Tappable'), onTap: () {})   // adds ripple
+```
+
+### SDListItem
+
+```dart
+SDListItem(title: 'Simple row')
+SDListItem(title: 'Jane Smith', subtitle: 'Admin', leading: SDAvatar.initials(initials: 'JS'))
+SDListItem(title: 'Alerts', trailing: SDBadge.count(count: 3), onTap: () {})
+```
+
+### SDTable
+
+```dart
+SDTable(
+  columns: [SDTableColumn(label: 'Name'), SDTableColumn(label: 'Score', numeric: true)],
+  rows: [[Text('Alice'), Text('95')], [Text('Bob'), Text('87')]],
+)
+```
+
+### SDBadge / SDAvatar / SDChip / SDTag
+
+```dart
+SDBadge.count(count: 5)    // numbered circle
+SDBadge.count(count: 120)  // shows "99+"
+SDBadge.dot()              // 8dp dot
+
+SDAvatar.initials(initials: 'JS')
+SDAvatar.icon(icon: Icons.person)
+SDAvatar.image(image: NetworkImage('https://...'))
+
+SDChip.filter(label: 'Flutter', selected: _sel, onSelected: (v) {})
+SDChip.action(label: 'Share', onPressed: () {})
+SDChip.input(label: 'dart', onDeleted: () {})
+
+SDTag(label: 'Active')
+SDTag(label: 'Error', color: Theme.of(context).colorScheme.errorContainer)
+```
+
 ---
 
 ## Animation Tokens
@@ -169,8 +279,8 @@ See [CHANGELOG.md](CHANGELOG.md) for the full version history and upcoming miles
 | Version | Components |
 |---|---|
 | **v0.1** ✅ | Tokens, SDTheme, SDButton, SDText, SDIconLabel, SDDivider, SDSpinner |
-| v0.2 | SDTextField, SDDropdown, SDCheckbox, SDRadio, SDSwitch, SDSlider, SDForm |
-| v0.3 | SDCard, SDList, SDTable, SDBadge, SDAvatar, SDChip, SDTag |
+| **v0.2** ✅ | SDTextField, SDDropdown, SDMultiSelect, SDCheckbox, SDRadioGroup, SDSwitch, SDSlider, SDDatePicker, SDForm |
+| **v0.3** ✅ | SDCard, SDListItem, SDTable, SDBadge, SDAvatar, SDChip, SDTag |
 | v0.4 | SDAlert, SDModal, SDSnackbar, SDToast, SDBottomSheet, SDProgressBar |
 | v0.5 | SDAppBar, SDTabs, SDBottomNav, SDDrawer, SDBreadcrumb |
 | v0.6 | SDAccordion, SDCarousel, SDBentoBox, SDEmptyState |
