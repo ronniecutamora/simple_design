@@ -197,3 +197,6 @@ MaterialApp(
 SDButton.primary(label: 'Submit', onPressed: () {})
 SDTextField(label: 'Email', hint: 'Enter your email')
 ```
+
+## Coding Rules
+- Respect existing coding pattern or design pattern and you must adhere it
