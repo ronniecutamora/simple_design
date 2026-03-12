@@ -30,23 +30,28 @@ class SDTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: DataTable(
-        columns: columns
-            .map((col) => DataColumn(
-                  label: Text(col.label),
-                  numeric: col.numeric,
-                ))
-            .toList(),
-        rows: rows
-            .map((cells) => DataRow(
-                  cells: cells
-                      .map((cell) => DataCell(cell))
-                      .toList(),
-                ))
-            .toList(),
-      ),
+    return LayoutBuilder(        // ← reads the available width from ListView
+      builder: (context, constraints) {
+        return SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: ConstrainedBox(   // ← gives DataTable a real minimum width
+            constraints: BoxConstraints(minWidth: constraints.maxWidth),
+            child: DataTable(
+              columns: columns
+                  .map((col) => DataColumn(
+                        label: Text(col.label),
+                        numeric: col.numeric,
+                      ))
+                  .toList(),
+              rows: rows
+                  .map((cells) => DataRow(
+                        cells: cells.map((cell) => DataCell(cell)).toList(),
+                      ))
+                  .toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 }
