@@ -6,6 +6,42 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v0.7.3] — 2026-03-13
+
+### Added — Tokens
+
+- **`SDSemanticColors`** — `ThemeExtension` providing semantic state colors for success, info, and warning
+  - Soft variants (`*Container`, `on*Container`) — for inline components like `SDAlert`
+  - Solid variants (`*`, `on*`) — for floating components like `SDSnackbar` and `SDToast`
+  - Registered automatically on `SDTheme.light` and `SDTheme.dark`; access via `Theme.of(context).extension<SDSemanticColors>()`
+  - Colors: green (success), blue (info), amber (warning) in addition to existing red (error)
+
+### Added — Components
+
+- **`SDSnackbar`** — expanded with semantic color methods
+  - `.showSuccess(context, {message, actionLabel?, onAction?})` — green background
+  - `.showInfo(context, {message, actionLabel?, onAction?})` — blue background
+  - `.showWarning(context, {message, actionLabel?, onAction?})` — amber background
+  - Complements existing `.show()` and `.showError()`
+
+### Changed — Components
+
+- **`SDAlert`** — now uses `SDSemanticColors` for distinct semantic color shading
+  - `.info()` — blue (`infoContainer` / `onInfoContainer`)
+  - `.success()` — green (`successContainer` / `onSuccessContainer`)
+  - `.warning()` — amber (`warningContainer` / `onWarningContainer`)
+  - `.error()` — red (`colorScheme.errorContainer` / `colorScheme.onErrorContainer`)
+
+### Changed — Documentation
+
+- **README.md** — completely rewritten for clarity and usability
+  - Added table of contents for quick navigation
+  - Organized sections by feature (Foundation, Forms & Inputs, Data Display, etc.)
+  - Removed version/CI information; focused on usage examples
+  - Added code snippets for every component category
+
+---
+
 ## [v0.7.0] — 2026-03-12
 
 ### Added — Components
@@ -291,10 +327,10 @@ Versions follow [Semantic Versioning](https://semver.org/).
 
 | Version | Focus |
 |---|---|
-| v0.2.0 | Forms & Inputs — `SDTextField`, `SDDropdown`, `SDCheckbox`, `SDRadio`, `SDSwitch`, `SDSlider`, `SDForm` |
-| v0.3.0 | Data Display — `SDCard`, `SDList`, `SDTable`, `SDBadge`, `SDAvatar`, `SDChip`, `SDTag` |
+| v0.2.0 ✅ | Forms & Inputs — `SDTextField`, `SDDropdown`, `SDCheckbox`, `SDRadio`, `SDSwitch`, `SDSlider`, `SDForm` |
+| v0.3.0 ✅ | Data Display — `SDCard`, `SDList`, `SDTable`, `SDBadge`, `SDAvatar`, `SDChip`, `SDTag` |
 | v0.4.0 ✅ | Feedback — `SDAlert`, `SDModal`, `SDSnackbar`, `SDToast`, `SDBottomSheet`, `SDProgressBar`, `SDSkeletonLoader` |
 | v0.5.0 ✅ | Navigation — `SDAppBar`, `SDTabs`, `SDBottomNav`, `SDDrawer`, `SDBreadcrumb`, `SDStepIndicator` |
 | v0.6.0 ✅ | Layout — `SDDividerLabel`, `SDAccordion`, `SDCarousel`, `SDBentoBox`, `SDEmptyState` |
-| v0.7.0 ✅ | Entry Screens — `SDSplashScreen`, `SDLoginScreen`, `SDRegisterScreen`, `SDForgotPasswordScreen`, `SDOnboardingScreen` |
-| v1.0.0 | Dark theme showcase, full README, release |
+| v0.7.3 ✅ | Entry Screens + Semantic Colors — `SDSplashScreen`, `SDLoginScreen`, `SDRegisterScreen`, `SDForgotPasswordScreen`, `SDOnboardingScreen`, `SDSemanticColors` |
+| v1.0.0 | Theme showcase, full release |
